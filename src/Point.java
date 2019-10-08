@@ -1,29 +1,29 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class Point {
 
-    private List<Integer> temp_numbers = new ArrayList<Integer>();
     private int value = 0;
-    private int[][] position;
+    private int line =0;
+    private int column = 0;
 
-    public Point(List<Integer> temp_numbers, int value, int[][] position) {
-        this.temp_numbers = temp_numbers;
+    public Point( int value, int line, int column) {
         this.value = value;
-        this.position = position;
+        this.line = line;
+        this.column = line;
     }
 
-    public Point(int value, int [][] position) {
-        this.value = value;
-        this.position = position;
+    public Point() {
     }
 
-    public List<Integer> getTemp_numbers() {
-        return temp_numbers;
+    public boolean checkRow(Point num){
+
+        return false;
     }
 
-    public void setTemp_numbers(List<Integer> temp_numbers) {
-        this.temp_numbers = temp_numbers;
+    public boolean checkColumn(Point num){
+        return false;
+    }
+
+    public boolean checkCell(Point num){
+        return false;
     }
 
     public int getValue() {
@@ -34,11 +34,21 @@ public class Point {
         this.value = value;
     }
 
-    public int[][] getPosition() {
-        return position;
+    public int getLine() {
+        return line;
     }
 
-    public void setPosition(int[][] position) {
-        this.position = position;
+    public void setLine(int line) {
+        this.line = line;
     }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public void setColumn(int column) {
+        this.column = column;
+    }
+
+
 }
