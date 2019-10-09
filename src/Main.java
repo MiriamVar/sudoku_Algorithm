@@ -17,8 +17,10 @@ public class Main {
         //checkovanie pola
         boolean change = met.checkingPoints(gameBoard);
         System.out.println("change "+change);
+        if(change){
+            met.printing(gameBoard);
+        }
 
-        met.printing(gameBoard);
 
 
 

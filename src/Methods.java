@@ -3,74 +3,109 @@ import java.util.ArrayList;
 public class Methods {
 
     public boolean checkRow(Point num, Point[][] arr){
-        ArrayList<Integer> list = new ArrayList<>();
-        if(num.getValue() ==0){
-            int line = num.getLine();
-            System.out.println("Line "+line);
-            num.setValue(1);
-            int value = num.getValue();
-            System.out.println("hodnota na zaciatku "+ value);
-            for (int i=1;i<9;i++){
-                int numInLine = arr[line][i].getLine();
-                System.out.println("hodnota cisel v riadku "+numInLine);
-                if(value==numInLine){
-                    System.out.println("Nachadza sa v riakdu");
-                    return false;
-                }else{
-                    list.add(numInLine);
-                }
-                value++;
-                System.out.println("zvysenie value "+value);
+//        ArrayList<Integer> list = new ArrayList<>();
+//        if(num.getValue() ==0){
+//            int line = num.getLine();
+//            System.out.println("Line "+line);
+//            num.setValue(1);
+//            int value = num.getValue();
+//            System.out.println("hodnota na zaciatku "+ value);
+//            for (int i=1;i<9;i++){
+//                int numInLine = arr[line][i].getLine();
+//                System.out.println("hodnota cisel v riadku "+numInLine);
+//                if(value==numInLine){
+//                    System.out.println("Nachadza sa v riakdu");
+//                    return false;
+//                }else{
+//                    list.add(numInLine);
+//                }
+//                value++;
+//                System.out.println("zvysenie value "+value);
+//            }
+//            num.setOptions(list);
+//            return true;
+//        }
+//        return false;
+        int line = num.getLine();
+        int value = num.getValue();
+        for (int i =0; i<9; i++){
+            if (value == arr[line][i].getValue()){
+                System.out.println("nachadza sa v riadku");
+                return true;
             }
-            num.setOptions(list);
-            return true;
         }
         return false;
+
     }
 
     public boolean checkColumn(Point num, Point[][]arr){
-        ArrayList<Integer> list = new ArrayList<>();
-        if(num.getValue() ==0){
-            int col = num.getColumn();
-            num.setValue(1);
-            int value = num.getValue();
-            for (int i=0;i<9;i++){
-                int numInCol = arr[col][i].getColumn();
-                if(value==numInCol){
-                    System.out.println("Nachadza sa v stlpci");
-                    return false;
-                }else{
-                    list.add(numInCol);
-                }
-                value++;
+//        ArrayList<Integer> list = new ArrayList<>();
+//        if(num.getValue() ==0){
+//            int col = num.getColumn();
+//            num.setValue(1);
+//            int value = num.getValue();
+//            for (int i=0;i<9;i++){
+//                int numInCol = arr[col][i].getColumn();
+//                if(value==numInCol){
+//                    System.out.println("Nachadza sa v stlpci");
+//                    return false;
+//                }else{
+//                    list.add(numInCol);
+//                }
+//                value++;
+//            }
+//            num.setOptions(list);
+//            return true;
+//        }
+//        return false;
+        int col = num.getColumn();
+        int value = num.getValue();
+        for (int i =0; i<9; i++){
+            if (value == arr[i][col].getValue()){
+                System.out.println("nachadza sa v stlpci");
+                return true;
             }
-            num.setOptions(list);
-            return true;
         }
         return false;
     }
 
     public boolean checkCell(Point num, Point[][] arr){
-        ArrayList<Integer> list = new ArrayList<>();
-        if(num.getValue()==0){
-            int line = num.getLine();
-            int col = num.getColumn();
-            num.setValue(1);
-            int value = num.getValue();
-            int lineX = (line%3)*3;
-            int colX= (col%3)*3;
+//        ArrayList<Integer> list = new ArrayList<>();
+//        if(num.getValue()==0){
+//            int line = num.getLine();
+//            int col = num.getColumn();
+//            num.setValue(1);
+//            int value = num.getValue();
+//            int lineX = (line%3)*3;
+//            int colX= (col%3)*3;
+//
+//            for (int i=lineX; i<lineX+3; i++){
+//                for (int j=colX; j<colX+3;j++){
+//                    int tempNum = arr[i][j].getValue();
+//                    if (tempNum == value){
+//                        System.out.println("nachadza sa v bunke");
+//                        return false;
+//                    }else{
+//                        list.add(value);
+//                        value++;
+//                        return true;
+//                    }
+//                }
+//            }
+//        }
+//        return false;
+        int line = num.getLine();
+        int col = num.getColumn();
+        int value = num.getValue();
+        int lineX = (line%3)*3;
+        int colX= (col%3)*3;
 
-            for (int i=lineX; i<lineX+3; i++){
-                for (int j=colX; j<colX+3;j++){
-                    int tempNum = arr[i][j].getValue();
-                    if (tempNum == value){
-                        System.out.println("nachadza sa v bunke");
-                        return false;
-                    }else{
-                        list.add(value);
-                        value++;
-                        return true;
-                    }
+        for (int i=lineX; i<lineX+3; i++) {
+            for (int j = colX; j < colX + 3; j++) {
+                int tempNum = arr[i][j].getValue();
+                if (tempNum == value) {
+                    System.out.println("nachadza sa v bunke");
+                    return true;
                 }
             }
         }
@@ -114,44 +149,35 @@ public class Methods {
     }
 
     public boolean checkingPoints(Point[][] arr) {
-        int i, j;
+        int i, j,k;
+        int val = 1;
         for (i = 0; i < 9; i++) {
             for (j = 0; j < 9; j++) {
                 Point tempPoint = new Point(arr[i][j].getValue(), arr[i][j].getLine(), arr[i][j].getColumn(), arr[i][j].getOptions());
                 int value = tempPoint.getValue();
-                ArrayList options = tempPoint.getOptions();
                 if (value == 0) {
-                    boolean result = checkRow(tempPoint, arr);
-                    //checuje riadok
-                    if (result) {
-                        if(options.size() ==1){
-                            tempPoint.setValue(value); // ak sedi iba jedna moznost
-                        } else {
-                            options.clear();
-                            result = checkColumn(tempPoint, arr);
-                            //checkujem stlpec
+                    System.out.println("idem checkovat riadok");
+                    boolean resultRow = checkRow(tempPoint, arr);
+                    System.out.println("resultRow " + resultRow);
 
-                            if (result) {
-                                if (options.size() == 1) {
-                                    tempPoint.setValue(value); // ak sedi iba jedna moznost
-                                } else {
-                                    options.clear();
-                                    result = checkCell(tempPoint, arr);
-                                    //checkujem bunku
+                    if(!resultRow){
+                        System.out.println("idem checkovat stlpec");
+                        boolean resultCol = checkColumn(tempPoint,arr);
+                        System.out.println("resultCol "+resultCol);
 
-                                    if (result) {
-                                        if(options.size() == 1) {
-                                            tempPoint.setValue(value); // ak sedi vsade zmenim hodnoto
-                                            return true;
-                                        }else {
-                                            options.clear();
-                                        }
-                                    }
-                                }
+                        if (!resultCol){
+                            System.out.println("idem checkovat bunku");
+                            boolean resultCell = checkCell(tempPoint,arr);
+                            System.out.println("reslutCell "+resultCell);
+
+                            if (!resultCell){
+                                System.out.println("idem menit hodnotu");
+                                tempPoint.setValue(val);
+                                return true;
                             }
-
                         }
                     }
+                    val++;
                 }
             }
         }
