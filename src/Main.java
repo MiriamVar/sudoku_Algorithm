@@ -14,6 +14,11 @@ public class Main {
         //vykreslenie pola
         met.printing(gameBoard);
 
+        //checkovanie pola
+        boolean change = met.checkingPoints(gameBoard);
+        System.out.println("change "+change);
+
+        met.printing(gameBoard);
 
 
 

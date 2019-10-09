@@ -6,14 +6,21 @@ public class Methods {
         ArrayList<Integer> list = new ArrayList<>();
         if(num.getValue() ==0){
             int line = num.getLine();
-            for (int i=0;i<9;i++){
+            System.out.println("Line "+line);
+            num.setValue(1);
+            int value = num.getValue();
+            System.out.println("hodnota na zaciatku "+ value);
+            for (int i=1;i<9;i++){
                 int numInLine = arr[line][i].getLine();
-                if(i==numInLine){
+                System.out.println("hodnota cisel v riadku "+numInLine);
+                if(value==numInLine){
                     System.out.println("Nachadza sa v riakdu");
                     return false;
                 }else{
                     list.add(numInLine);
                 }
+                value++;
+                System.out.println("zvysenie value "+value);
             }
             num.setOptions(list);
             return true;
@@ -25,14 +32,17 @@ public class Methods {
         ArrayList<Integer> list = new ArrayList<>();
         if(num.getValue() ==0){
             int col = num.getColumn();
+            num.setValue(1);
+            int value = num.getValue();
             for (int i=0;i<9;i++){
                 int numInCol = arr[col][i].getColumn();
-                if(i==numInCol){
+                if(value==numInCol){
                     System.out.println("Nachadza sa v stlpci");
                     return false;
                 }else{
                     list.add(numInCol);
                 }
+                value++;
             }
             num.setOptions(list);
             return true;
@@ -45,19 +55,20 @@ public class Methods {
         if(num.getValue()==0){
             int line = num.getLine();
             int col = num.getColumn();
+            num.setValue(1);
+            int value = num.getValue();
             int lineX = (line%3)*3;
             int colX= (col%3)*3;
-            int counter = 1;
 
             for (int i=lineX; i<lineX+3; i++){
                 for (int j=colX; j<colX+3;j++){
                     int tempNum = arr[i][j].getValue();
-                    if (tempNum == counter){
+                    if (tempNum == value){
                         System.out.println("nachadza sa v bunke");
                         return false;
                     }else{
-                        list.add(counter);
-                        counter++;
+                        list.add(value);
+                        value++;
                         return true;
                     }
                 }
@@ -116,6 +127,7 @@ public class Methods {
                         if(options.size() ==1){
                             tempPoint.setValue(value); // ak sedi iba jedna moznost
                         } else {
+                            options.clear();
                             result = checkColumn(tempPoint, arr);
                             //checkujem stlpec
 
@@ -123,12 +135,16 @@ public class Methods {
                                 if (options.size() == 1) {
                                     tempPoint.setValue(value); // ak sedi iba jedna moznost
                                 } else {
+                                    options.clear();
                                     result = checkCell(tempPoint, arr);
                                     //checkujem bunku
 
                                     if (result) {
                                         if(options.size() == 1) {
                                             tempPoint.setValue(value); // ak sedi vsade zmenim hodnoto
+                                            return true;
+                                        }else {
+                                            options.clear();
                                         }
                                     }
                                 }
